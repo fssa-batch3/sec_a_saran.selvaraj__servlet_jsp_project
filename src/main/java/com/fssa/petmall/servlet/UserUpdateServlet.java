@@ -27,29 +27,29 @@ public class UserUpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String fname = request.getParameter("fname");
 		String lname = request.getParameter("lname");
-		String gender = request.getParameter("gender");
 		String dob = request.getParameter("dob");
 		String phone = request.getParameter("phone");
-		
+		String gender = request.getParameter("gender");
 		User user = new User(fname,lname,gender,phone,dob);
 		UserService userService = new UserService();
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("loggedInusername1",fname);
-		session.setAttribute("loggedInusername2",lname);
-		session.setAttribute("loggedIngender",gender);
-        session.setAttribute("loggedInmobileNumber",phone);
-        session.setAttribute("loggedIndateOfBirth",dob);
+		
 		String email = (String) session.getAttribute("loggedInEmail");
 			try {
 				if(userService.updateUser(user,email)) {
 				    PrintWriter out = response.getWriter();
 					out.println("User registered successfully");
+					session.setAttribute("loggedInusername1",fname);
+					session.setAttribute("loggedInusername2",lname);
+					session.setAttribute("loggedIngender",gender);
+			        session.setAttribute("loggedInmobileNumber",phone);
+			        session.setAttribute("loggedIndateOfBirth",dob);
 					response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");
 				}
 			} catch (ServiceException | IOException e) {
 				PrintWriter out = response.getWriter();
 				out.println("Update unsuccessfull");
-			}
+				out.print(e.getMessage());			}
 	}
 }

@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Pet create</title>
 </head>
 <body>
-
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 		<header>Update your Pet's Detail</header>
 
@@ -75,7 +75,7 @@
 						<button class="nextBtns" type="submit">
 							<span class="btnText">submit</span> <i class="uil uil-navigator"></i>
 						</button>
-						<a class="nextBtns" href="Home.jsp" class="edit-save-delete">Back</a>
+						
 
 					</div>
 				</div>
@@ -102,7 +102,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #ebfff1;
+	background: var(--body-color);
 }
 
 .container {
@@ -224,20 +224,20 @@ form .fields .input-field {
 	align-items: center;
 	justify-content: center;
 	height: 45px;
-	max-width: 200px;
+	max-width: 250px;
 	width: 100%;
 	border: none;
 	outline: none;
 	color: #fff;
 	border-radius: 5px;
 	margin: 25px 0;
-	background-color: #14a800;
+	background-color: var(--primary-color);
 	transition: all 0.3s linear;
 	cursor: pointer;
 }
 
 .container form .btnText {
-	font-size: 14px;
+	font-size: 20px;
 	font-weight: 400;
 }
 
@@ -256,7 +256,9 @@ form .backBtn i {
 form .buttons {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	column-gap: 100px;
+	 font-size: 50px;
 }
 
 form .buttons button, .backBtn {

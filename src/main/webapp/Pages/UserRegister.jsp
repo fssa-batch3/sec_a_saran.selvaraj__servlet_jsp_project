@@ -10,6 +10,7 @@
 <title>Register</title>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	 <div class="Whole-div">
     <div class="title">Registration</div>
     <div class="content">
@@ -17,16 +18,16 @@
         <div class="admin-details">
           <div class="input-box">
             <span class="details">Full Name</span>
-            <input type="text" value="saran"  name="fname" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{2,30}$" required >
+            <input type="text" value="Ram"  name="fname"  required >
           </div>
           <div class="input-box">
             <span class="details">Last name</span>
-            <input type="text" value="selvaraj"  name="lname" pattern="^[a-zA-Z][a-zA-Z0-9]{1,20}$" required>
+            <input type="text" value="Ramalingam"  name="lname" required>
           </div>
           
           <div class="input-box">
             <span class="details">Gender</span>
-            <input type="text" value="Male"name="gender" pattern="^[a-zA-Z][a-zA-Z0-9]{1,20}$" required>
+            <input type="text" value="Male"name="gender"  required>
           </div>
           
           <div class="input-box">
@@ -35,22 +36,22 @@
           </div>
           <div class="input-box">
             <span class="details">Email</span>
-            <input type="email" value="Mohammedajmal@gmail.com"name="email"  title="Email should contain @ and .com to proceed"   required>
+            <input type="email" value="Ram@gmail.com"name="email"  title="Email should contain @ and .com to proceed"   required>
           </div>
           <div class="input-box">
             <span class="details">Phone Number</span>
-            <input type="text" value="9876543210" name="phone" pattern="[0-9]{5}[0-9]{5}" required>
+            <input type="text" value="9876543210" name="phone" required>
           </div>
           <div class="input-box">
             <span class="details">Password</span>
             
-            <input type="password" class= "icon" value="Saran@2004"name="password"  title="Password should contain atleast 8 characters and atleast One Capital letter, One Small letter, One Number."   pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
+            <input type="password" class= "icon" value="Ram@2004"name="password"  title="Password should contain atleast 8 characters and atleast One Capital letter, One Small letter, One Number."   required>
             
           
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
-            <input type="password" value="Saran@2004" required>
+            <input type="password" value="Ram@2004" required>
           </div>
         </div>
         
@@ -60,7 +61,7 @@
           
           <button id="submit" class="submit">SUBMIT</button>
         </div>
-        <div class="signup-link" style="margin-left:200px;">Do you have an Account? <a href="../index.html">Login</a></div>
+        <div class="signup-link" style="margin-left:200px;">Do you have an Account? <a href="UserLogin.jsp">Login</a></div>
       </form>
     </div>
   </div>

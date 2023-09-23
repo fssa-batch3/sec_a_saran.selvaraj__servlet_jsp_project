@@ -28,7 +28,7 @@ import com.fssa.petmall.services.exception.ServiceException;
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -38,9 +38,14 @@ public class UserLoginServlet extends HttpServlet {
 	    // Create session.
 	    HttpSession session = request.getSession();
 	    // Passing email for getting userID.
-	    User userObject = fetchUserIDByEmail(email);
+	    User userObject = null;
+		try {
+			userObject = userService.fetchUserIDByEmail(email);
+		} catch (ServiceException e) {
+			out.print(e.getMessage().getClass());
+		}
 	    try {
-	        if (userService.loginUser(user) && (userObject.getIsDeleted() == 0)) {
+	        if (userService.loginUser(user) ) {
 	            // Setting attributes in session
 	            session.setAttribute("loggedInEmail",email);
 	            session.setAttribute("loggedInUserID",userObject.getUserID());
@@ -59,30 +64,5 @@ public class UserLoginServlet extends HttpServlet {
 	        response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed. Please check your email and password.");
 	    }
 	}
-	private User fetchUserIDByEmail(String email) {
-		User user1 = null;
-		// Database query
-		String query = "SELECT * FROM user_details WHERE email = ?";
-		try (Connection connection = Utills.getConnection();
-		    PreparedStatement statement = connection.prepareStatement(query)) {
-			statement.setString(1, email);
-			try (ResultSet resultSet = statement.executeQuery()) {
-				if (resultSet.next()){
-					int userID = resultSet.getInt("userID");
-					String Email = resultSet.getString("Email");
-					String First_name = resultSet.getString("First_name");
-					String Last_name = resultSet.getString("Last_name");
-					String Date_of_birth = resultSet.getString("Date_of_birth");
-					String Gender = resultSet.getString("Gender");
-					String Phone_number = resultSet.getString("Phone_number");
-					String Password = resultSet.getString("Password");
-					int isDeleted = resultSet.getInt("is_deleted");
-					user1 = new User(userID,First_name,Last_name,Gender,Phone_number,Date_of_birth,isDeleted);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return user1;
-	}
+	
 }

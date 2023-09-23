@@ -5,23 +5,23 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
 <title>Login</title>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
      <div class="container">
       <!-- <div><img src="./assets/images/image.logo.png" height="150px" width="300px" alt="logo-image"></div> -->  
       <div class="wrapper">
         <div class="title"><span>Login Form</span></div>
-        <form action="../UserLoginServlet" method="get" id="form">
+        <form action="../UserLoginServlet" method="post" id="form">
             
           <div class="row">
             
-            <input type="text" id="email" value="Ajmal@gmail.com" name="email" required>
+            <input type="text" id="email" value="Ram@gmail.com" name="email" required>
           </div>
           <div class="row">
-            <input type="password" id="password" value="Kotie@123" name="password" required>
+            <input type="password" id="password" value="Ram@2004" name="password" required>
           </div>
           <!-- <div class="pass"><a href="#">Forgot password?</a></div> -->
           <div class="row button">

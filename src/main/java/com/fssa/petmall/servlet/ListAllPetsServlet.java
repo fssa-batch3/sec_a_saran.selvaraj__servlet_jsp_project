@@ -1,10 +1,12 @@
 package com.fssa.petmall.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +24,22 @@ public class ListAllPetsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PetService petservice = new PetService(); 
-		List<Pet> list = new ArrayList<>(); 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PetService PetService = new PetService();
 		HttpSession session = request.getSession();
 		String email = (String)session.getAttribute("loggedInEmail");
 		try {
-			list = petservice.listAllPets(email);
+			PrintWriter out = response.getWriter();
+			List<Pet> listpets = new ArrayList<>();
+			PetService petService = new PetService(); 
+			listpets = petService.listAllPets();
+			
+			request.setAttribute("petList", listpets);
+			
+			response.sendRedirect(request.getContextPath()+"/Pages/ListAllPets.jsp");
+			
+		     
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

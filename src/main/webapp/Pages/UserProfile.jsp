@@ -32,19 +32,20 @@
 	  <div class="form-group">
 	  	<label for="email">Date of Birth:</label>
 	  	<div class="relative">
-	  		<input class="form-control" id="fname" name="dob" value="${sessionScope.loggedIngender}" type="text" required >	  		
+	  		<input class="form-control" id="fname" name="dob" value="${sessionScope.loggedIndateOfBirth}" type="text" required >	  		
 	  	</div>
 	  </div>
 	  <div class="form-group">
+	  
 	  	<label for="email">Phone number:</label>
 	  	<div class="relative">
-	  	<input class="form-control" id="fname" name="phone" value="${sessionScope.loggedIndateOfBirth}" type="text" required >
+	  	<input class="form-control" id="fname" name="phone" value="${sessionScope.loggedInmobileNumber}" type="text" required >
 	  </div>	
 	  </div>
 	  <div class="form-group">
 			<label for="email">Gender:</label>
 	  	<div class="relative">
-	  		<input class="form-control" id="fname" name="gender" value="${sessionScope.loggedInmobileNumber}" type="text" required >  		
+	  		<input class="form-control" id="fname" name="gender" value="${sessionScope.loggedIngender}" type="text" required >  		
 	  	</div>
 	  </div>              	
 	  <div class="tright">

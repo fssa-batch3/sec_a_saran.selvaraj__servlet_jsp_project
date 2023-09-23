@@ -35,16 +35,27 @@ public class PetCreateServlet extends HttpServlet {
 		String vaccination = request.getParameter("vaccination");
 		HttpSession session = request.getSession();
 		String soldUserEmail = (String) session.getAttribute("loggedInEmail");
-		Pet pet = new Pet(image,name,personalname,dob,specialtalent,behavior, price,phone,vaccination,soldUserEmail);
-		PetService petService = new PetService();
-
+		Pet pet = new Pet();
+		pet.setpetimageurl(image);
+		pet.setRealName(name);
+		pet.setPersonalName(personalname);
+		pet.setSpecialTalent(specialtalent);
+		pet.setDob(dob);
+		pet.setBehavior(behavior);
+		pet.setPrice(price);
+		pet.setMobileNumber(phone);
+		pet.setVaccinationCertificate(vaccination);
+		pet.setsoldUserEmail(soldUserEmail);
 		try {
-			if(petService.createPet(pet)) {
+			if(PetService.createPet(pet)) {
 
 			PrintWriter out = response.getWriter();
 				out.println("Pet created successfully");
 				
 				response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");
+			}else {
+				PrintWriter out = response.getWriter();
+				out.println("Pet creation Failed");
 			}
 
 		} catch (Exception e) {

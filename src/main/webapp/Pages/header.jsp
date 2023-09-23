@@ -14,6 +14,7 @@
 <%
     // Retrieve user_persona from localStorage and convert it to a Java variable
     String userPersona = (String) pageContext.getAttribute("user_persona");
+    String email = (String)session.getAttribute("loggedInEmail");
 %>
 
 <nav class="sidebar close">
@@ -26,7 +27,9 @@
             <i class="bx bx-chevron-right toggle"></i>
         </div>
     </header>
-
+ <%String currentURL = request.getRequestURI();
+   if(!currentURL.equals("/petmall-web/index.jsp")){ 
+   if (email == null || email.isEmpty()) { %>
     <div class="menu-bar">
         <div class="menu">
             <li class="search-box">
@@ -35,8 +38,8 @@
             </li>
             
             <ul class="menu-links">
-                <% if ("seller".equals(userPersona)) { %>
-                    <li class="nav-link">
+             
+                   <!-- <li class="nav-link">
                         <a href="PetCreate.jsp">
                             <i class="bx bx-bar-chart-alt-2 icon"></i>
                             <span class="text nav-text">Sell Pet</span>
@@ -47,10 +50,7 @@
                             <i class="bx bx-bell icon"></i>
                             <span class="text nav-text">Sold pets</span>
                         </a>
-                    </li>
-                <% } %>
-                <% if (!"seller".equals(userPersona)) { %>
-                
+                    </li> -->
                     <li class="nav-link">
                         <a href="Home.jsp">
                             <i class='bx bx-home-alt icon'></i>
@@ -58,7 +58,54 @@
                         </a>
                     </li>
                     <li class="nav-link">
+                    <a href="Home.jsp">
+                        <i class="bx bx-pie-chart-alt icon"></i>
+                        <span class="text nav-text">About us</span>
+                    </a>
+                </li>
+                   </ul>
+                </div>
+                <div class="bottom-content">
+        
+                <li class="nav-link">
+                    <a href="UserLogin.jsp">
+                        <i class='bx bx-log-in icon'></i>
+                        <span class="text nav-text">Log in</span>
+                    </a>
+                </li>
+                <li class="mode">
+                
+                <span class="mode-text text">Dark mode</span>
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+                </li>
+              </div>
+                </div>
+                <% } else{ %>
+                <div class="menu-bar">
+                 <div class="menu">
+            <li class="search-box">
+                <i class="bx bx-search icon"></i>
+                <input type="text" placeholder="Search...">
+            </li>
+            
+                
+                <ul>
+                    <li class="nav-link">
                         <a href="Home.jsp">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="PetCreate.jsp">
+                            <i class="bx bx-bar-chart-alt-2 icon"></i>
+                            <span class="text nav-text">Sell Pet</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="OrderDetails.jsp">
                             <i class="bx bx-bell icon"></i>
                             <span class="text nav-text">Order details</span>
                         </a>
@@ -69,8 +116,7 @@
                             <span class="text nav-text">Cart</span>
                         </a>
                     </li>
-                <% } %>
-                <li class="nav-link">
+                    <li class="nav-link">
                     <a href="UserProfile.jsp" id="account">
                         <i class="bx bx-user icon"></i>
                         <span class="text nav-text">Account</span>
@@ -81,25 +127,147 @@
                         <i class="bx bx-pie-chart-alt icon"></i>
                         <span class="text nav-text">About us</span>
                     </a>
-                </li>
+                </li> 
             </ul>
         </div>
 
         <div class="bottom-content">
+        
             <li class="nav-link">
-                    <a href="../UserLogoutServlet">
+                    <a href="/petmall-web/logout">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Log out</span>
                     </a>
                 </li>
-            <li class="mode">
+                <li class="mode">
                 
                 <span class="mode-text text">Dark mode</span>
                 <div class="toggle-switch">
                     <span class="switch"></span>
                 </div>
-            </li>
+                </li>
         </div>
+        </div>
+        <%}}else{
+        if (email == null || email.isEmpty()) { %>
+    <div class="menu-bar">
+        <div class="menu">
+            <li class="search-box">
+                <i class="bx bx-search icon"></i>
+                <input type="text" placeholder="Search...">
+            </li>
+            
+            <ul class="menu-links">
+             
+                   <!-- <li class="nav-link">
+                        <a href="PetCreate.jsp">
+                            <i class="bx bx-bar-chart-alt-2 icon"></i>
+                            <span class="text nav-text">Sell Pet</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="PetCreate.jsp">
+                            <i class="bx bx-bell icon"></i>
+                            <span class="text nav-text">Sold pets</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-link">
+                        <a href="Home.jsp">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                    <a href="Home.jsp">
+                        <i class="bx bx-pie-chart-alt icon"></i>
+                        <span class="text nav-text">About us</span>
+                    </a>
+                </li>
+                   </ul>
+                </div>
+                <div class="bottom-content">
+        
+                <li class="nav-link">
+                    <a href="UserLogin.jsp">
+                        <i class='bx bx-log-in icon'></i>
+                        <span class="text nav-text">Log in</span>
+                    </a>
+                </li>
+                <li class="mode">
+                
+                <span class="mode-text text">Dark mode</span>
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+                </li>
+              </div>
+                </div>
+                <% }else{ %>
+                 <div class="menu-bar">
+                 <div class="menu">
+            <li class="search-box">
+                <i class="bx bx-search icon"></i>
+                <input type="text" placeholder="Search...">
+            </li>
+                
+                <ul>
+                    <li class="nav-link">
+                        <a href="Home.jsp">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="PetCreate.jsp">
+                            <i class="bx bx-bar-chart-alt-2 icon"></i>
+                            <span class="text nav-text">Sell Pet</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="OrderDetails.jsp">
+                            <i class="bx bx-bell icon"></i>
+                            <span class="text nav-text">Order details</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="Home.jsp">
+                            <i class="bx bx-cart add icon"></i>
+                            <span class="text nav-text">Cart</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                    <a href="UserProfile.jsp" id="account">
+                        <i class="bx bx-user icon"></i>
+                        <span class="text nav-text">Account</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="Home.jsp">
+                        <i class="bx bx-pie-chart-alt icon"></i>
+                        <span class="text nav-text">About us</span>
+                    </a>
+                </li> 
+            </ul>
+        </div>
+
+        <div class="bottom-content">
+        
+            <li class="nav-link">
+                    <a href="/petmall-web/logout">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Log out</span>
+                    </a>
+                </li>
+                <li class="mode">
+                
+                <span class="mode-text text">Dark mode</span>
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+                </li>
+        </div>
+        <%}}%>
+        
     </div>
 </nav>
 
@@ -153,17 +321,17 @@ modeText.innerText = "Dark mode";
 
 :root{
     /* ===== Colors ===== */
-    --body-color: #ebfff1;
-    --sidebar-color: #b7ffaf;
-    --primary-color: #14a800;
-    --primary-color-light: #F6F5FF;
-    --toggle-color: #14a800;
-    --text-color: #14a800;
-    --sec-color:#d5ffd0;
-    --bottom-content:#91ff85;
+    --body-color: white;
+    --sidebar-color:#eff6ff;
+    --primary-color: #1877f2;
+    --primary-color-light: #8cbeff;
+    --toggle-color: #1877f2;
+    --text-color: #1877f2;
+    --sec-color:#eff6ff;
+    --bottom-content:#1877f2;
     --botttom-text:black;
-    --card-background1:#91ff85;
-    --card-background2:#c4ffbc;
+    --card-background1:#63a6ff;
+    --card-background2:#8cbeff;
     
 
     /* ====== Transition ====== */
@@ -179,7 +347,6 @@ body{
     transition: var(--tran-05);
     display: flex;
     justify-content: center;
-    align-items: center;
 
 }
 
@@ -485,146 +652,202 @@ body.dark .home .text{
     margin-left: 60px;
 
 }
-.card {
-  position: relative;
-  width: 340px;
-  height: 550px;
-  background-color:var(--card-background1);
-  transition: var(--tran-05); 
-  border-radius: 20px;
-  overflow: hidden;
-  margin: 50px 0px 50px 70px;
-}
 
-.card::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  width: 100%;
-  height: 100%;
-  background-color: var(--card-background2);
-  transition: var(--tran-05);
-  transform: skewY(345deg);
 
-}
+footer{
 
-.card:hover::before {
-  top: -70%;
-  transform: skewY(390deg);
-}
+    background-color:var(--sec-color) ;
+    width: 100%;
+    bottom: 0;
+    left: 100px;
+    top:100px;
+    transition: var(--tran-05);
+    position: relative;
+  }
+  footer::before{
+    content: '';
+    left: 100px;
+    top: 100px;
+    height: 1px;
+    width: 100px;
+    background: #AFAFB6;
+  }
+  footer .content{
+    max-width: 1250px;
 
-.card::after {
- 
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  font-weight: 600;
-  font-size: 6em;
-  color: rgba(0, 0, 0, 0.1);
-}
-
-.card .imgBox {
-  position: relative;
-  width: 100%;
-  height: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  z-index: 1;
-}
-.imgBox img{
-    max-width:90% ;
-    max-height: 90%;
-    border-radius: 15px;
-}
-.card .imgBox img {
-    max-width: 90%;
-    transition: .5s;
-}
-
-.card:hover .imgBox img {
-    max-width: 90%;
-}
-
-.card .contentBox {
-  position: relative;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 2;
-}
-
-.card .contentBox h3 {
-  font-size: 18px;
-  color: #1877f2;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.card .contentBox .price {
-  font-size: 24px;
-  color: #1877f2;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.card .contentBox .buy {
-  position: relative;
-  top: 100px;
-  opacity: 0;
-  padding: 10px 30px;
-  color: #000000;
-  text-decoration: none;
-  background: #ffce00;
-  border-radius: 30px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: 0.5s;
-}
-
-.card:hover .contentBox .buy {
-  top: 0;
-  /* margin: 0px 0px 20px 0px; */
-  margin-bottom: 35px;
-  opacity: 1;
-}
-
-.mouse {
-  height: 300px;
-  width: auto;
-}
-.update,.delete{
-    
-    top: 0px;
-    opacity: 1;
-    padding: 7.5px 20px;
-    color: #000000;
-    text-decoration: none;
-    background: #ffce00;
-    border-radius: 30px;
-    text-transform: uppercase;
-    /* letter-spacing: 1px; */
-    transition: 0.5s;
- }
-.edit_delete{
+    padding: 30px 40px 40px 40px;
+  }
+  footer .content .top{
     display: flex;
-    justify-content: center;
-    text-align:center;
     align-items: center;
-    align-content: center;
-    column-gap: 50px;
-}
-.card:hover .update,.card:hover .delete{
-    top: 1;
-    margin-bottom: 100px;
-  opacity: 1;
-
-}
- @media (max-width: 1500px) {
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  .content .top .logo-details{
+    color: var(--text-color);
+    font-size: 30px;
+    transition: var(--tran-03);
+  }
+  .content .top .media-icons{
+    display: flex;
+  }
+  .content .top .media-icons a{
+    height: 40px;
+    width: 40px;
+    margin: 0 8px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-size: 17px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+  .top .media-icons a:nth-child(1){
+    background: #4267B2;
+  }
+  .top .media-icons a:nth-child(1):hover{
+    color: #4267B2;
+    background: #fff;
+  }
+  .top .media-icons a:nth-child(2){
+    background: #1DA1F2;
+  }
+  .top .media-icons a:nth-child(2):hover{
+    color: #1DA1F2;
+    background: #fff;
+  }
+  .top .media-icons a:nth-child(3){
+    background: #E1306C;
+  }
+  .top .media-icons a:nth-child(3):hover{
+    color: #E1306C;
+    background: #fff;
+  }
+  .top .media-icons a:nth-child(4){
+    background: #0077B5;
+  }
+  .top .media-icons a:nth-child(4):hover{
+    color: #0077B5;
+    background: #fff;
+  }
+  .top .media-icons a:nth-child(5){
+    background: #FF0000;
+  }
+  .top .media-icons a:nth-child(5):hover{
+    color: #FF0000;
+    background: #fff;
+  }
+  .link-boxes{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    
+  }
+  footer .content .link-boxes .box{
+    width: calc(100% / 5 - 10px);
+  }
+  .content .link-boxes .box .link_name{
+    color:var(--text-color);
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .link-boxes .box .link_name::before{
+    content: '';
+    position: relative;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 35px;
+    background: #fff;
+  }
+  .content .link-boxes .box li{
+    margin: 6px 0;
+    list-style: none;
+  }
+  .content .link-boxes .box li a{
+    color:var(--text-color);
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: all 0.4s ease
+  }
+  .content .link-boxes .box li a:hover{
+    opacity: 1;
+    text-decoration: underline;
+  }
+  .content .link-boxes .input-box{
+    margin-right: 55px;
+  }
+  .link-boxes .input-box input{
+    height: 40px;
+    width: calc(100% + 55px);
+    outline: none;
+    border: 2px solid #AFAFB6;
+    background: #140B5C;
+    border-radius: 4px;
+    padding: 0 15px;
+    font-size: 15px;
+    color: #000000;
+    margin-top: 5px;
+  }
+  .link-boxes .input-box input::placeholder{
+    color: var(--text-color);
+    font-size: 16px;
+  }
+  .link-boxes .input-box input[type="button"]{
+    background: #fff;
+    color: #140B5C;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 4px 0;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  .input-box input[type="button"]:hover{
+    opacity: 1;
+  }
+  footer .bottom-details{
+    width: 100%;
+    color:var(--botttom-text);
+    transition: var(--tran-05);
+    background-color: var(--bottom-content);
+  }
+  footer .bottom-details:after{
+    width: 100%;
+    color:var(--botttom-text);
+    transition: var(--tran-05);
+    background-color:var(--bottom-content);
+  }
+  footer .bottom-details .bottom_text{
+    max-width: 1250px;
+    margin: auto;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .bottom-details .bottom_text span,
+  .bottom-details .bottom_text a{
+    font-size: 14px;
+    font-weight: 300;
+    color:var(--botttom-text);
+    transition: var(--tran-05);
+    opacity: 0.8;
+    text-decoration: none;
+  }
+  .bottom-details .bottom_text a:hover{
+    opacity: 1;
+    text-decoration: underline;
+  }
+  .bottom-details .bottom_text a{
+    margin-right: 10px;
+  }
+  @media (max-width: 1500px) {
     footer .content .link-boxes{
       flex-wrap: wrap;
     }
@@ -701,7 +924,7 @@ body.dark .home .text{
         flex-wrap: wrap;
       }
   }
-  
+    
 </style>
 
 
