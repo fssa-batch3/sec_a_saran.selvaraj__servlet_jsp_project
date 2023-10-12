@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Page not found</title>
+<link rel="icon" type="image/png" href="PetMallLogo.png" />
+<title>Pet mall | Page not found</title>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+
 <div id="error-page">
          <div class="content">
             <h2 class="header" data-text="404">
@@ -21,11 +22,16 @@
             </p>
             <div class="btns">
                <a href="Home.jsp">return home</a>
-               <a href="Problem.jsp">report problem</a>
+               <a onclick="GoBack()">Go back</a>
             </div>
          </div>
       </div>
 </body>
+<script type="text/javascript">
+		function GoBack() {
+			window.history.back();
+		}
+	</script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 *{
@@ -44,8 +50,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+   border-radius:10px;
+  background:white;
+   box-shadow: 0px 0px 40px rgb(221, 220, 220);
 }
 #error-page .content{
   max-width: 600px;

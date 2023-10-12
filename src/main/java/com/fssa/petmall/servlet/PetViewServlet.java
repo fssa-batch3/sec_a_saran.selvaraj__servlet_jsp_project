@@ -1,7 +1,9 @@
 package com.fssa.petmall.servlet;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fssa.petmall.model.*;
-import com.fssa.petmall.services.*;
+
+import com.fssa.petmall.model.Pet;
 import com.fssa.petmall.utills.Utills;
 
 /**
@@ -20,12 +22,13 @@ import com.fssa.petmall.utills.Utills;
 @WebServlet("/PetViewServlet")
 public class PetViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Pet> petList = new ArrayList<>();
         Connection connection = Utills.getConnection();
         try {
-            
+
 
             // Create a SQL statement
             Statement statement = (Statement) connection;

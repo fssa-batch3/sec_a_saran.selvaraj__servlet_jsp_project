@@ -4,10 +4,10 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-
+<link rel="icon" type="image/png" href="PetMallLogo.png" />
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
-<title>Register</title>
+<title>Pet mall | Register</title>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
@@ -64,7 +64,6 @@
         <div class="signup-link" style="margin-left:200px;">Do you have an Account? <a href="UserLogin.jsp">Login</a></div>
       </form>
     </div>
-  </div>
 
 </body>
 <style>
@@ -87,7 +86,7 @@ body{
 .Whole-div{
   max-width: 700px;
   width: 100%;
-  background-color: #ebfff1;
+  background-color: #daeaff;
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);

@@ -1,10 +1,8 @@
 package com.fssa.petmall.servlet;
 
 import java.io.IOException;
-
-
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +21,7 @@ import com.fssa.petmall.services.exception.ServiceException;
 public class UserUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String fname = request.getParameter("fname");
@@ -32,12 +31,12 @@ public class UserUpdateServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		User user = new User(fname,lname,gender,phone,dob);
 		UserService userService = new UserService();
-		
+
 		HttpSession session = request.getSession();
-		
+
 		String email = (String) session.getAttribute("loggedInEmail");
 			try {
-				if(userService.updateUser(user,email)) {
+				if(UserService.updateUser(user,email)) {
 				    PrintWriter out = response.getWriter();
 					out.println("User registered successfully");
 					session.setAttribute("loggedInusername1",fname);

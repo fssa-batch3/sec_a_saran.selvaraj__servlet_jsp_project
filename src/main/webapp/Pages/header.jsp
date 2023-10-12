@@ -5,21 +5,29 @@
     <meta charset="UTF-8">
      <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-    <title>User Sidebar</title>
+    <title>Pet mall | Sidebar</title>
+    <link rel="icon" type="image/png" href="PetMallLogo.png" />
     <!-- Include necessary CSS and JavaScript libraries -->
     <!-- You can add the links here -->
 </head>
 <body>
 
 <%
-    // Retrieve user_persona from localStorage and convert it to a Java variable
-    String userPersona = (String) pageContext.getAttribute("user_persona");
-    String email = (String)session.getAttribute("loggedInEmail");
+
+    String email = null;
+    try{
+    email = (String)session.getAttribute("loggedInEmail");
+    }catch(Exception e){
+    	 response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp");  
+    }
 %>
 
 <nav class="sidebar close">
     <header>
         <div class="image-text">
+        
+       <a href="Home.jsp"><img style="width:50px; height:50px; margin:0px 20px 0px 5px;"src="PetMallLogo.png"></a>
+        
             <div class="text logo-text">
                 <span class="name">Pet Mall</span>
                 <span class="profession">E-commerce</span>
@@ -29,28 +37,14 @@
     </header>
  <%String currentURL = request.getRequestURI();
    if(!currentURL.equals("/petmall-web/index.jsp")){ 
-   if (email == null || email.isEmpty()) { %>
+   if (email == null ) { %>
     <div class="menu-bar">
         <div class="menu">
+         <ul class="menu-links">
             <li class="search-box">
                 <i class="bx bx-search icon"></i>
                 <input type="text" placeholder="Search...">
-            </li>
-            
-            <ul class="menu-links">
-             
-                   <!-- <li class="nav-link">
-                        <a href="PetCreate.jsp">
-                            <i class="bx bx-bar-chart-alt-2 icon"></i>
-                            <span class="text nav-text">Sell Pet</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="PetCreate.jsp">
-                            <i class="bx bx-bell icon"></i>
-                            <span class="text nav-text">Sold pets</span>
-                        </a>
-                    </li> -->
+           </li>
                     <li class="nav-link">
                         <a href="Home.jsp">
                             <i class='bx bx-home-alt icon'></i>
@@ -59,7 +53,7 @@
                     </li>
                     <li class="nav-link">
                     <a href="Home.jsp">
-                        <i class="bx bx-pie-chart-alt icon"></i>
+                        <i class='bx bxs-group icon'></i>
                         <span class="text nav-text">About us</span>
                     </a>
                 </li>
@@ -75,7 +69,7 @@
                 </li>
                 <li class="mode">
                 
-                <span class="mode-text text">Dark mode</span>
+                <span class="mode-text text"id="mode-text">Light mode</span>
                 <div class="toggle-switch">
                     <span class="switch"></span>
                 </div>
@@ -93,29 +87,32 @@
                 
                 <ul>
                     <li class="nav-link">
-                        <a href="Home.jsp">
+                        <a href="Home.jsp" title="Home">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Home</span>
                         </a>
                     </li>
+                    <%if(email.equals("ram@gmail.com")){  %>
                     <li class="nav-link">
                         <a href="PetCreate.jsp">
-                            <i class="bx bx-bar-chart-alt-2 icon"></i>
+                           <i class="bx bx-bar-chart-alt-2 icon"></i>
                             <span class="text nav-text">Sell Pet</span>
                         </a>
                     </li>
+                    <li class="nav-link">
+                        <a href="SoldPets.jsp">
+                            <i class='bx bx-basket icon'></i>
+                            <span class="text nav-text">Sold pets</span>
+                        </a>
+                    </li>
+                    <%}else{ %>
                     <li class="nav-link">
                         <a href="OrderDetails.jsp">
                             <i class="bx bx-bell icon"></i>
                             <span class="text nav-text">Order details</span>
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="Home.jsp">
-                            <i class="bx bx-cart add icon"></i>
-                            <span class="text nav-text">Cart</span>
-                        </a>
-                    </li>
+                    <%} %>
                     <li class="nav-link">
                     <a href="UserProfile.jsp" id="account">
                         <i class="bx bx-user icon"></i>
@@ -124,7 +121,7 @@
                 </li>
                 <li class="nav-link">
                     <a href="Home.jsp">
-                        <i class="bx bx-pie-chart-alt icon"></i>
+                        <i class='bx bxs-group icon'></i>
                         <span class="text nav-text">About us</span>
                     </a>
                 </li> 
@@ -133,15 +130,18 @@
 
         <div class="bottom-content">
         
-            <li class="nav-link">
-                    <a href="/petmall-web/logout">
+                <li class="nav-link">
+                    <a href="../UserLogoutServlet">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Log out</span>
                     </a>
                 </li>
                 <li class="mode">
-                
-                <span class="mode-text text">Dark mode</span>
+                <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                <span class="mode-text text" id="mode-text"></i>Light mode</span>
                 <div class="toggle-switch">
                     <span class="switch"></span>
                 </div>
@@ -158,19 +158,6 @@
             </li>
             
             <ul class="menu-links">
-             
-                   <!-- <li class="nav-link">
-                        <a href="PetCreate.jsp">
-                            <i class="bx bx-bar-chart-alt-2 icon"></i>
-                            <span class="text nav-text">Sell Pet</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="PetCreate.jsp">
-                            <i class="bx bx-bell icon"></i>
-                            <span class="text nav-text">Sold pets</span>
-                        </a>
-                    </li> -->
                     <li class="nav-link">
                         <a href="Home.jsp">
                             <i class='bx bx-home-alt icon'></i>
@@ -179,7 +166,7 @@
                     </li>
                     <li class="nav-link">
                     <a href="Home.jsp">
-                        <i class="bx bx-pie-chart-alt icon"></i>
+                        <i class='bx bxs-group icon'></i>
                         <span class="text nav-text">About us</span>
                     </a>
                 </li>
@@ -194,8 +181,11 @@
                     </a>
                 </li>
                 <li class="mode">
-                
-                <span class="mode-text text">Dark mode</span>
+                <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                <span class="mode-text text" id="mode-text"></i>Light mode</span>
                 <div class="toggle-switch">
                     <span class="switch"></span>
                 </div>
@@ -217,6 +207,7 @@
                             <span class="text nav-text">Home</span>
                         </a>
                     </li>
+                    <%if(email.equals("ram@gmail.com")) {%>
                     <li class="nav-link">
                         <a href="PetCreate.jsp">
                             <i class="bx bx-bar-chart-alt-2 icon"></i>
@@ -224,15 +215,16 @@
                         </a>
                     </li>
                     <li class="nav-link">
+                        <a href="SoldPets.jsp">
+                            <i class='bx bx-basket icon'></i>
+                            <span class="text nav-text">Sold Pets</span>
+                        </a>
+                    </li>
+                    <%} %>
+                    <li class="nav-link">
                         <a href="OrderDetails.jsp">
                             <i class="bx bx-bell icon"></i>
                             <span class="text nav-text">Order details</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="Home.jsp">
-                            <i class="bx bx-cart add icon"></i>
-                            <span class="text nav-text">Cart</span>
                         </a>
                     </li>
                     <li class="nav-link">
@@ -243,7 +235,7 @@
                 </li>
                 <li class="nav-link">
                     <a href="Home.jsp">
-                        <i class="bx bx-pie-chart-alt icon"></i>
+                       <i class='bx bxs-group icon'></i>
                         <span class="text nav-text">About us</span>
                     </a>
                 </li> 
@@ -251,21 +243,23 @@
         </div>
 
         <div class="bottom-content">
-        
             <li class="nav-link">
-                    <a href="/petmall-web/logout">
+                    <a href="UserLogoutServlet">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Log out</span>
                     </a>
                 </li>
                 <li class="mode">
-                
-                <span class="mode-text text">Dark mode</span>
+                <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                <span class="mode-text text" id="mode-text"></i>Light mode</span>
                 <div class="toggle-switch">
                     <span class="switch"></span>
                 </div>
                 </li>
-        </div>
+        	</div>
         <%}}%>
         
     </div>
@@ -278,12 +272,11 @@
 </body>
 <script>
 const body = document.querySelector('body'),
-section = document.querySelector('section'),
 sidebar = body.querySelector('nav'),
 toggle = body.querySelector(".toggle"),
 searchBtn = body.querySelector(".search-box"),
 modeSwitch = body.querySelector(".toggle-switch"),
-modeText = body.querySelector(".mode-text");
+modeText = document.getElementById("mode-text");
 
 
 toggle.addEventListener("click" , () =>{
@@ -296,15 +289,13 @@ sidebar.classList.remove("close");
 
 modeSwitch.addEventListener("click" , () =>{
 body.classList.toggle("dark");
-section.classList.toggle("dark");
-
 if(body.classList.contains("dark")){
-modeText.innerText = "Light mode";
-}else{
-modeText.innerText = "Dark mode";
-
+	modeText.innerText = "Dark mode";
+	}else{
+	modeText.innerText = "Light mode";
 }
 });
+
 </script>
 </html>
 <style>
@@ -560,19 +551,19 @@ body.dark .sidebar li a:hover .text{
     height: 50px;
     width: 60px;
 }
-
 .mode .sun-moon i{
     position: absolute;
 }
-.mode .sun-moon i.sun{
+.mode .sun-moon i.moon{
     opacity: 0;
-}
-body.dark .mode .sun-moon i.sun{
-    opacity: 1;
 }
 body.dark .mode .sun-moon i.moon{
+    opacity: 1;
+}
+body.dark .mode .sun-moon i.sun{
     opacity: 0;
 }
+
 
 .menu-bar .bottom-content .toggle-switch{
     position: absolute;
@@ -653,277 +644,6 @@ body.dark .home .text{
 
 }
 
-
-footer{
-
-    background-color:var(--sec-color) ;
-    width: 100%;
-    bottom: 0;
-    left: 100px;
-    top:100px;
-    transition: var(--tran-05);
-    position: relative;
-  }
-  footer::before{
-    content: '';
-    left: 100px;
-    top: 100px;
-    height: 1px;
-    width: 100px;
-    background: #AFAFB6;
-  }
-  footer .content{
-    max-width: 1250px;
-
-    padding: 30px 40px 40px 40px;
-  }
-  footer .content .top{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 50px;
-  }
-  .content .top .logo-details{
-    color: var(--text-color);
-    font-size: 30px;
-    transition: var(--tran-03);
-  }
-  .content .top .media-icons{
-    display: flex;
-  }
-  .content .top .media-icons a{
-    height: 40px;
-    width: 40px;
-    margin: 0 8px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 40px;
-    color: #fff;
-    font-size: 17px;
-    text-decoration: none;
-    transition: all 0.4s ease;
-  }
-  .top .media-icons a:nth-child(1){
-    background: #4267B2;
-  }
-  .top .media-icons a:nth-child(1):hover{
-    color: #4267B2;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(2){
-    background: #1DA1F2;
-  }
-  .top .media-icons a:nth-child(2):hover{
-    color: #1DA1F2;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(3){
-    background: #E1306C;
-  }
-  .top .media-icons a:nth-child(3):hover{
-    color: #E1306C;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(4){
-    background: #0077B5;
-  }
-  .top .media-icons a:nth-child(4):hover{
-    color: #0077B5;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(5){
-    background: #FF0000;
-  }
-  .top .media-icons a:nth-child(5):hover{
-    color: #FF0000;
-    background: #fff;
-  }
-  .link-boxes{
-    width: 100%;
-    display: flex;
-    justify-content: left;
-    
-  }
-  footer .content .link-boxes .box{
-    width: calc(100% / 5 - 10px);
-  }
-  .content .link-boxes .box .link_name{
-    color:var(--text-color);
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 10px;
-    position: relative;
-  }
-  .link-boxes .box .link_name::before{
-    content: '';
-    position: relative;
-    left: 0;
-    bottom: -2px;
-    height: 2px;
-    width: 35px;
-    background: #fff;
-  }
-  .content .link-boxes .box li{
-    margin: 6px 0;
-    list-style: none;
-  }
-  .content .link-boxes .box li a{
-    color:var(--text-color);
-    font-size: 14px;
-    font-weight: 400;
-    text-decoration: none;
-    opacity: 0.8;
-    transition: all 0.4s ease
-  }
-  .content .link-boxes .box li a:hover{
-    opacity: 1;
-    text-decoration: underline;
-  }
-  .content .link-boxes .input-box{
-    margin-right: 55px;
-  }
-  .link-boxes .input-box input{
-    height: 40px;
-    width: calc(100% + 55px);
-    outline: none;
-    border: 2px solid #AFAFB6;
-    background: #140B5C;
-    border-radius: 4px;
-    padding: 0 15px;
-    font-size: 15px;
-    color: #000000;
-    margin-top: 5px;
-  }
-  .link-boxes .input-box input::placeholder{
-    color: var(--text-color);
-    font-size: 16px;
-  }
-  .link-boxes .input-box input[type="button"]{
-    background: #fff;
-    color: #140B5C;
-    border: none;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 4px 0;
-    opacity: 0.8;
-    cursor: pointer;
-    transition: all 0.4s ease;
-  }
-  .input-box input[type="button"]:hover{
-    opacity: 1;
-  }
-  footer .bottom-details{
-    width: 100%;
-    color:var(--botttom-text);
-    transition: var(--tran-05);
-    background-color: var(--bottom-content);
-  }
-  footer .bottom-details:after{
-    width: 100%;
-    color:var(--botttom-text);
-    transition: var(--tran-05);
-    background-color:var(--bottom-content);
-  }
-  footer .bottom-details .bottom_text{
-    max-width: 1250px;
-    margin: auto;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .bottom-details .bottom_text span,
-  .bottom-details .bottom_text a{
-    font-size: 14px;
-    font-weight: 300;
-    color:var(--botttom-text);
-    transition: var(--tran-05);
-    opacity: 0.8;
-    text-decoration: none;
-  }
-  .bottom-details .bottom_text a:hover{
-    opacity: 1;
-    text-decoration: underline;
-  }
-  .bottom-details .bottom_text a{
-    margin-right: 10px;
-  }
-  @media (max-width: 1500px) {
-    footer .content .link-boxes{
-      flex-wrap: wrap;
-    }
-    footer .content .link-boxes .input-box{
-      width: 40%;
-      margin-top: 10px;
-    }
-    .whole-card{
-        display: flex;
-        flex-wrap: wrap;
-        margin: 50px 50px ;
-      }
-  }
-  @media (max-width: 900px) {
-    footer .content .link-boxes{
-      flex-wrap: wrap;
-    }
-    footer .content .link-boxes .input-box{
-      width: 40%;
-      margin-top: 10px;
-    }
-    .whole-card{
-        display: flex;
-        flex-wrap: wrap;
-      }
-  }
-
-  @media (max-width: 700px){
-    footer{
-      position: relative;
-    }
-    .content .top .logo-details{
-      font-size: 26px;
-    }
-    .content .top .media-icons a{
-      height: 35px;
-      width: 35px;
-      font-size: 14px;
-      line-height: 35px;
-    }
-    footer .content .link-boxes .box{
-      width: calc(100% / 3 - 10px);
-    }
-    footer .content .link-boxes .input-box{
-      width: 60%;
-    }
-    .bottom-details .bottom_text span,
-    .bottom-details .bottom_text a{
-      font-size: 12px;
-    }
-    .whole-card{
-        display: flex;
-        flex-wrap: wrap;
-      }
-  }
-  @media (max-width: 520px){
-    footer::before{
-      top: 145px;
-    }
-    footer .content .top{
-      flex-direction: column;
-    }
-    .content .top .media-icons{
-      margin-top: 16px;
-    }
-    footer .content .link-boxes .box{
-      width: calc(100% / 2 - 10px);
-    }
-    footer .content .link-boxes .input-box{
-      width: 100%;
-    }
-    .whole-card{
-        display: flex;
-        flex-wrap: wrap;
-      }
-  }
     
 </style>
 

@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Home Page</title>
+<link rel="icon" type="image/png" href="PetMallLogo.png" />
+
+<title>Pet mall | Home</title>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include> 
@@ -12,10 +14,6 @@
 <%
 	String loggedInEmail = (String) session.getAttribute("loggedInEmail");
     String loggedInusername = (String) session.getAttribute("loggedInusername1");
-    
-	if(loggedInEmail == null) {
-		response.sendRedirect("UserLogin.jsp");
-	}
 %>
 <div>
 <%if(loggedInEmail != null){ %>
@@ -23,10 +21,11 @@
 <p class="p">Logged In user: ${loggedInEmail}</p>
 <%} else{%>
 <h1 class="h1">Welcome to Pet Mall web App</h1>
-<%} %>
-<jsp:include page="ListAllPets.jsp"></jsp:include>
-</div>
 
+<%} %>
+
+</div>
+<jsp:include page="ListAllPets.jsp"></jsp:include>
             <footer>
               <div class="content">	
                 <div class="top">
@@ -45,10 +44,10 @@
                 <div class="link-boxes">
                   <ul class="box">
                     <li class="link_name">Company</li>
-                    <li><a src="./home-page-2.html">Home</a></li>
+                    <li><a src="Home.jsp">Home</a></li>
                     <li><a href="#">Contact us</a></li>
                     <li><a href="#">About us</a></li>
-                    <li><a href="#">Get started</a></li>
+                    <li><a href="UserLogin.jsp">Get started</a></li>
                   </ul>
                   
                   <ul class="box">
@@ -56,7 +55,11 @@
                     <li><a href="UserProfile.jsp">My account</a></li>
                     
                   </ul>
-                  
+                  <ul class="box">
+                    <li class="link_name">Seller</li>
+                    <li>If you are a seller<br><a href="UserRegister.jsp">"Register"</a> to sell pets<br> or you can also<br> <a href="UserLogin.jsp">"Login"</a> if you<br> already registered.</li>
+                    
+                  </ul>
                   
                 </div>
               </div>
@@ -70,7 +73,7 @@
                 </div>
               </div>
             </footer>
-        </div>
+     </div>
 </body>
 <style>
 .h1,.p{

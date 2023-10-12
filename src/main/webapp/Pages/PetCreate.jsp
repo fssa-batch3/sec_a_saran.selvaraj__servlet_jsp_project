@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Pet create</title>
+<link rel="icon" type="image/png" href="PetMallLogo.png" />
+<title>Pet mall | Pet create</title>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>

@@ -4,11 +4,13 @@
 <%@page import="com.fssa.petmall.services.PetService"%>
 <%@ page import="com.fssa.petmall.model.*"%>
 <%@page import="java.util.List"%>
+<%@page import="javax.swing.JOptionPane"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<link rel="icon" type="image/png" href="PetMallLogo.png" />
+<title>Pet mall | Pet Update</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -19,6 +21,7 @@
 	List<Pet> listpets = new ArrayList<>();
 	PetService petService = new PetService();
 	listpets = petService.viewPet(uniqueid);
+	//JOptionPane.showMessageDialog(null, "This is an alert message.", "Alert", JOptionPane.WARNING_MESSAGE);
 	%>
 
 	<div class="container">
@@ -33,7 +36,7 @@
 
                         <div class="input-field">
 							<label>Pet image</label> <input type="url" name="image"
-								value="https://img.freepik.com/free-photo/good-looking-siberian-husky-dog-grass_493961-927.jpg?t=st=1693971070~exp=1693971670~hmac=597eb4930762616b89ae34fedf05342e9cbc2d8d021d2f7fdcfc25fd41fc48fb"
+								value="<%=listpets.get(0).getpetimageurl()%>"
 								id="pet_img">
 						</div>
 						<div class="input-field">
@@ -50,11 +53,11 @@
 
 						<div class="input-field">
 							<label>DOB of the pet(YYYY-MM-DD)</label> <input type="text"
-								name="" value="<%=listpets.get(0).getDob()%>" id="dob_pet">
+								name="dob" value="<%=listpets.get(0).getDob()%>" id="dob_pet">
 						</div>
 
 						<div class="input-field">
-							<label>Special talent</label> <input type="text" name=""
+							<label>Special talent</label> <input type="text" name="talent"
 								value="<%=listpets.get(0).getSpecialTalent()%>"
 								id="special_talent">
 						</div>
@@ -92,8 +95,11 @@
 						
 					</div>
 					<div class="buttons">
+					    <a href="../PetDeleteServlet?id=<%=listpets.get(0).getuniqueID()%>"class="delete">
+							<span class="btnText">Delete</span> 
+						</a>
 						<button class="nextBtns" type="submit">
-							<span class="btnText">Update</span> <i class="uil uil-navigator"></i>
+							<span class="btnText">Update</span> 
 						</button>
 					</div>
 				</div>
@@ -252,6 +258,22 @@ form .fields .input-field {
 	background-color: var(--primary-color);
 	transition: all 0.3s linear;
 	cursor: pointer;
+}
+.delete{
+  width : 120px;
+  height: 45px;
+  text-decoration: none;
+  outline: none;
+  border:none;
+  padding: 8px 0px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  background-color: red;
+  cursor: pointer;
+  transition: all 0.3s ease;
+text-align: center;
 }
 
 .container form .btnText {

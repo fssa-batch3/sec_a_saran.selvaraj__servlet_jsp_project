@@ -1,10 +1,8 @@
 package com.fssa.petmall.servlet;
 
 import java.io.IOException;
-
-
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +20,7 @@ import com.fssa.petmall.services.UserService;
 public class UserRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String email = request.getParameter("email");
@@ -36,14 +35,22 @@ public class UserRegisterServlet extends HttpServlet {
 
 		try {
 			if(userService.registerUser(user1)) {
-
+				HttpSession session = request.getSession();
+				User userObject = userService.fetchUserIDByEmail(email);
+				session.setAttribute("loggedInEmail",email);
+	            session.setAttribute("loggedInUserID",userObject.getUserID());
+	            session.setAttribute("loggedInusername1",userObject.getfirst_name());
+	            session.setAttribute("loggedInusername2",userObject.getlast_name());
+	            session.setAttribute("loggedIngender",userObject.getGender());
+	            session.setAttribute("loggedInmobileNumber",userObject.getPhone_number());
+	            session.setAttribute("loggedIndateOfBirth",userObject.getDate_of_birth());
 			PrintWriter out = response.getWriter();
 				out.println("User registered successfully");
-				
-				response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp");
+
+				response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");
 			}
 
-		} catch (Exception e) {	
+		} catch (Exception e) {
 			if (email == null || "".equals(email)) {
 				PrintWriter out = response.getWriter();
 				out.println("Invalid Email");

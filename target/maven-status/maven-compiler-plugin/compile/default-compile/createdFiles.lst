@@ -1,9 +1,9 @@
 com\fssa\petmall\servlet\ListAllPetsServlet.class
 com\fssa\petmall\servlet\UserUpdateServlet.class
 com\fssa\petmall\servlet\PetCreateServlet.class
-com\fssa\petmall\servlets\GetAccountJSONServlet.class
 com\fssa\petmall\servlet\UserRegisterServlet.class
 com\fssa\petmall\servlets\GetAllAccountJSONServlet.class
-com\fssa\petmall\servlet\PetViewServlet.class
 com\fssa\petmall\servlet\UserLogoutServlet.class
+com\fssa\petmall\servlets\GetAccountJSONServlet.class
+com\fssa\petmall\servlet\PetViewServlet.class
 com\fssa\petmall\servlet\UserLoginServlet.class

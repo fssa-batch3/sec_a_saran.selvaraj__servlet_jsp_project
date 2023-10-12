@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="icon" type="image/png" href="PetMallLogo.png" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
-<title>Login</title>
+<title>Pet mall | Login</title>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
@@ -41,7 +42,7 @@
   font-family: 'Poppins',sans-serif;
 }
 body{
-  background: #98c4ff;
+  background: white;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -57,7 +58,7 @@ margin:50px ;
 }
 .wrapper{
   width: 100%;
-  background: #fff;
+  background:#eff6ff;
   border-radius: 5px;
   box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
 }

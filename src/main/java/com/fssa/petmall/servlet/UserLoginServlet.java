@@ -1,23 +1,16 @@
 package com.fssa.petmall.servlet;
 
 import java.io.IOException;
-
-
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.fssa.petmall.model.*;
-import com.fssa.petmall.utills.*;
+
+import com.fssa.petmall.model.User;
 import com.fssa.petmall.services.UserService;
 import com.fssa.petmall.services.exception.ServiceException;
 
@@ -28,6 +21,7 @@ import com.fssa.petmall.services.exception.ServiceException;
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String email = request.getParameter("email");
@@ -45,7 +39,7 @@ public class UserLoginServlet extends HttpServlet {
 			out.print(e.getMessage().getClass());
 		}
 	    try {
-	        if (userService.loginUser(user) ) {
+	        if (UserService.loginUser(user) ) {
 	            // Setting attributes in session
 	            session.setAttribute("loggedInEmail",email);
 	            session.setAttribute("loggedInUserID",userObject.getUserID());
@@ -53,8 +47,8 @@ public class UserLoginServlet extends HttpServlet {
 	            session.setAttribute("loggedInusername2",userObject.getlast_name());
 	            session.setAttribute("loggedIngender",userObject.getGender());
 	            session.setAttribute("loggedInmobileNumber",userObject.getPhone_number());
-	            session.setAttribute("loggedIndateOfBirth",userObject.getDate_of_birth());	            
-	            response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");    
+	            session.setAttribute("loggedIndateOfBirth",userObject.getDate_of_birth());
+	            response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");
 	        } else {
 	            // Invalid user credentials
 	            response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed. Please check your email and password.");
@@ -64,5 +58,5 @@ public class UserLoginServlet extends HttpServlet {
 	        response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed. Please check your email and password.");
 	    }
 	}
-	
+
 }

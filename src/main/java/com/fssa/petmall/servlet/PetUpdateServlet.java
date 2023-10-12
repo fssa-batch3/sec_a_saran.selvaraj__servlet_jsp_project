@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fssa.petmall.model.Pet;
-import com.fssa.petmall.services.*;
+import com.fssa.petmall.services.PetService;
 import com.fssa.petmall.services.exception.ServiceException;
 /**
  * Servlet implementation class PetUpdateServlet
@@ -17,7 +17,8 @@ import com.fssa.petmall.services.exception.ServiceException;
 @WebServlet("/PetUpdateServlet")
 public class PetUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String image = request.getParameter("image");
 		String name = request.getParameter("name");
@@ -43,7 +44,7 @@ public class PetUpdateServlet extends HttpServlet {
 		pet.setuniqueID(uniqueId);
 		PetService PetService = new PetService();
 		try {
-			PetService.updatePet(pet);
+			com.fssa.petmall.services.PetService.updatePet(pet);
 			response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");
 		} catch (ServiceException e) {
 			e.printStackTrace();

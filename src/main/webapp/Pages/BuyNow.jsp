@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" type="image/png" href="Logo.png">
+<link rel="icon" type="image/png" href="PetMallLogo.png"/>
 <meta charset="ISO-8859-1">
-<title>Buy Now</title>
+<title>Pet mall | Buy Now</title>
 </head>
 <body>
- 
+ <jsp:include page="header.jsp"></jsp:include> 
   <div class="modal">
     <form action="../BuyNowServlet" class="form" id="form" method="post">
       <div class="payment--options"> 

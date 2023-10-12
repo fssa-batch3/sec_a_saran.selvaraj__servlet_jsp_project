@@ -1,10 +1,8 @@
 package com.fssa.petmall.servlet;
 
 import java.io.IOException;
-
-
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +20,7 @@ import com.fssa.petmall.services.PetService;
 public class PetCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String image = request.getParameter("image");
@@ -51,7 +50,7 @@ public class PetCreateServlet extends HttpServlet {
 
 			PrintWriter out = response.getWriter();
 				out.println("Pet created successfully");
-				
+
 				response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");
 			}else {
 				PrintWriter out = response.getWriter();

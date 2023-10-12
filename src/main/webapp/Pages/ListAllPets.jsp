@@ -17,78 +17,8 @@
 <head>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
 	rel='stylesheet'>
-<title>List of Pets</title>
-</head>
-<body>
-	<div class="whole-card">
-	<%
-	
-	String loggedInEmail = (String)session.getAttribute("loggedInEmail"); 
-	List<Pet> listpets = new ArrayList<>();
-	PetService petService = new PetService(); 
-	listpets = petService.listAllPets();
-	if(loggedInEmail != null || !loggedInEmail.isEmpty()){
-	for(Pet pets : listpets) {%>
-
-			<div class="product-card">
-				<div class="product-tumb">
-					<img src="<%=pets.getpetimageurl()%>" alt="<%=pets.getRealName()%> image">
-				</div>
-				<div class="product-details">
-					<h4>
-						<a href="">Pet Name : <%=pets.getRealName()%> </a>
-					</h4>
-					<p>
-						Name : <%=pets.getPersonalName()%><br>DOB : <%=pets.getDob()%>
-					</p>
-					<div class="product-bottom-details">
-						<div class="product-price">
-							Price : <i class='bx bx-rupee'></i> <%=pets.getPrice()%>
-						</div>
-						<div class="product-links">
-
-							
-							<%if(loggedInEmail.equals(pets.getsoldUserEmail())){ %>
-								<a class="button" href="PetUpdate.jsp?id=<%=pets.getuniqueID()%>">Update</a>
-								<a class="button" href="PetDetails.jsp?id=<%=pets.getuniqueID()%>">View</a>
-							<%}else{ %>
-							
-								<a class="button" href="PetDetails.jsp?id=<%=pets.getuniqueID()%>">Buy
-									now</a>
-							<%} %>
-						</div>
-					</div>
-				</div>
-			</div>
-		<%}}else{
-		for(Pet pets : listpets) {%>
-
-			<div class="product-card">
-				<div class="product-tumb">
-					<img src="<%=pets.getpetimageurl()%>" alt="<%=pets.getRealName()%> image">
-				</div>
-				<div class="product-details">
-					<h4>
-						<a href="">Pet Name : <%=pets.getRealName()%> </a>
-					</h4>
-					<p>
-						Name : <%=pets.getPersonalName()%><br>DOB : <%=pets.getDob()%>
-					</p>
-					<div class="product-bottom-details">
-						<div class="product-price">
-							Price : <i class='bx bx-rupee'></i> <%=pets.getPrice()%>
-						</div>
-						<div class="product-links">
-								<a class="button" href="PetDetails.jsp?id=<%=pets.getuniqueID()%>">Buy now</a>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		<%} }%>
-
-	</div>
-</body>
+<link rel="icon" type="image/png" href="PetMallLogo.png" />
+<title>Pet mall | Pets</title>
 <style>
 @import
 	url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
@@ -115,6 +45,7 @@ a {
 	border-radius: 10px;
 	width: 300px;
 	position: relative;
+	border:5px solid var(--card-background1);
 	box-shadow: 0 2px 7px #dfdfdf;
 	margin: 30px 30px 30px 50px;
 	background: var(--card-background2);
@@ -319,7 +250,7 @@ footer .content .top {
 footer .content .link-boxes {
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 
 footer .content .link-boxes .box {
@@ -520,4 +451,62 @@ footer .bottom-details .bottom_text {
 	}
 }
 </style>
+</head>
+<body>
+	<div class="whole-card">
+		<%
+		    String loggedInEmail = (String) session.getAttribute("loggedInEmail");
+			List<Pet> listpets = new ArrayList<>();
+			PetService petService = new PetService();
+			listpets = petService.listAllPets();
+			for (Pet pets : listpets) {
+		%>
+
+		<div class="product-card">
+			<div class="product-tumb">
+				<img src="<%=pets.getpetimageurl()%>"
+					alt="<%=pets.getRealName()%> image">
+			</div>
+			<div class="product-details">
+				<h4>
+					<a href="">Pet bread : <%=pets.getRealName()%>
+					</a>
+				</h4>
+				<p>
+					Name :
+					<%=pets.getPersonalName()%><br>DOB :
+					<%=pets.getDob()%>
+				</p>
+				<div class="product-bottom-details">
+					<div class="product-price">
+						Price : <i class='bx bx-rupee'></i>
+						<%=pets.getPrice()%>
+					</div>
+					<div class="product-links">
+
+
+						<%
+						if (loggedInEmail == null) {
+						%>
+						<a class="button" href="UserLogin.jsp">Buynow</a>
+						<%
+						} else if(loggedInEmail.equals(pets.getsoldUserEmail())){%>
+
+                        <a class="button" href="PetUpdate.jsp?id=<%=pets.getuniqueID()%>">Update</a>
+						<a class="button" href="PetDetails.jsp?id=<%=pets.getuniqueID()%>">View</a>
+						
+						<%
+						}else{
+						%>
+						<a class="button" href="PetDetails.jsp?id=<%=pets.getuniqueID()%>">Buy now</a>
+						<%}%>
+					</div>
+				</div>
+			</div>
+		</div>
+<%} %>
+		
+	</div>
+</body>
+
 </html>
