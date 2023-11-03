@@ -34,7 +34,7 @@
         <input value="<%=id%>" name="id" style="display:none;">
       </div>
         <button class="purchase--btn"id="checkout">Checkout</button>
-        <button class="purchase--btn" id="buy_with_emi">Buy with EMI</button>
+        <!--<button class="purchase--btn" id="buy_with_emi">Buy with EMI</button> -->
     </form>
     </div>
   </body>
@@ -66,7 +66,6 @@
   </script>
   <style>
   body {
-  margin-top: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,8 +76,8 @@
   width: fit-content;
   height: fit-content;
   background: #FFFFFF;
-  box-shadow: 0px 0px 40px #14a800;
-  border:solid 0.1px #14a800;
+  box-shadow: 0px 0px 20px grey;
+  border:solid 0.1px grey;
   border-radius: 26px;
   max-width: 450px;
   padding: 51px;
@@ -145,12 +144,13 @@
 }
 
 .purchase--btn {
+  font-size:20px;
   height: 55px;
   border-radius: 11px;
   border: 0;
   outline: none;
   color: #ffffff;
-  background: linear-gradient(180deg, #363636 0%, #1B1B1B 50%, #000000 100%);
+  background-color:#1877f2; 
   box-shadow: 0px 0px 0px 0px #FFFFFF, 0px 0px 0px 0px #000000;
   transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
 }

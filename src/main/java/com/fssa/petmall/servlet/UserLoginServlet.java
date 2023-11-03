@@ -35,11 +35,9 @@ public class UserLoginServlet extends HttpServlet {
 	    User userObject = null;
 		try {
 			userObject = userService.fetchUserIDByEmail(email);
-		} catch (ServiceException e) {
-			out.print(e.getMessage().getClass());
-		}
-	    try {
-	        if (UserService.loginUser(user) ) {
+			if(userObject == null) {
+				response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=User not found please check you Email");
+			}else if (UserService.loginUser(user) ) {
 	            // Setting attributes in session
 	            session.setAttribute("loggedInEmail",email);
 	            session.setAttribute("loggedInUserID",userObject.getUserID());
@@ -51,7 +49,7 @@ public class UserLoginServlet extends HttpServlet {
 	            response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");
 	        } else {
 	            // Invalid user credentials
-	            response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed. Please check your email and password.");
+	            response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed. Please check your password.");
 	        }
 	    } catch (ServiceException e) {
 	        // Handle ServiceException by redirecting to the login page with an error message

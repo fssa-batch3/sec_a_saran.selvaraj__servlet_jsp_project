@@ -7,24 +7,19 @@
 <title>Pet Mall || Add Address</title>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include> 
-<form action="../AddressAddServlet">
+<form action="../AddressAddServlet"method="post" class="addresscreate">
  <div>
-  <h1><label for="w3review">Add address : </label></h1>
-  <textarea id="w3review"class="address" name="w3review" rows="7" cols="25">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.</textarea>
+  <h1 class="h1"><label for="w3review" class="label">Add address : </label></h1>
+  <textarea id="w3review"class="address" name="address" rows="7" cols="25" placeholder="Enter your address"></textarea>
   <br>
   <input type="submit" class="submit"value="Submit">
   </div>
 </form>
 </body>
 <style>
-body{
-display:flex;
-justify-content:center;
-align-items:center;
-}
+
 /* Apply basic styling to the form */
-form {
+.addresscreate {
   min-width: 300px;
   max-width:500px;
   max-height:350px;
@@ -37,7 +32,7 @@ form {
 }
 
 /* Style the label and textarea */
-label {
+.label {
   font-weight: bold;
 }
 
@@ -62,13 +57,13 @@ label {
 }
 
 /* Add some spacing between elements */
-h1 {
+.h1 {
   margin: 10px 0;
 }
 
 /* Add media query for smaller screens */
 @media (max-width: 768px) {
-  form {
+  .addresscreate {
     max-width: 90%;
   }
 }

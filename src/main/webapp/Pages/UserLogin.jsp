@@ -11,18 +11,17 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-     <div class="container">
-      <!-- <div><img src="./assets/images/image.logo.png" height="150px" width="300px" alt="logo-image"></div> -->  
+     <div class="container"> 
       <div class="wrapper">
         <div class="title"><span>Login Form</span></div>
         <form action="../UserLoginServlet" method="post" id="form">
             
           <div class="row">
             
-            <input type="text" id="email" value="Ram@gmail.com" name="email" required>
+            <input type="text" id="email" value="saran@gmail.com" name="email" required>
           </div>
           <div class="row">
-            <input type="password" id="password" value="Ram@2004" name="password" required>
+            <input type="password" id="password" value="Saran@2004" name="password" required>
           </div>
           <!-- <div class="pass"><a href="#">Forgot password?</a></div> -->
           <div class="row button">
@@ -30,7 +29,7 @@
           </div>
           <div class="signup-link">Not a member? <a href="UserRegister.jsp">Signup now</a></div>
         </form>
-      </div>
+      </div>            
     </div>
 </body>
 <style>
@@ -55,9 +54,10 @@ body{
   /* max-width: 440px; */
   padding: 0 20px;
 margin:50px ;
+display:flex;
 }
 .wrapper{
-  width: 100%;
+  width: 400px;
   background:#eff6ff;
   border-radius: 5px;
   box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);

@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.fssa.petmall.services.*;
 import com.fssa.petmall.services.exception.ServiceException;
 /**
@@ -16,12 +18,15 @@ public class AddressAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
    	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
+   		HttpSession session = request.getSession(true);
+   		
+		String email = (String) session.getAttribute("loggedInEmail");
 		String address = request.getParameter("address");
 		
 		UserService UserService = new UserService();
 		try {
 			UserService.createAddress(email, address);
+			response.sendRedirect(request.getContextPath()+"/Pages/UserProfile.jsp");
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

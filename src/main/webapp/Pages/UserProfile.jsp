@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.fssa.petmall.model.*"%>
+<%@ page import="com.fssa.petmall.services.*"%>
+<%@ page import="com.fssa.petmall.services.exception.*"%>
+<%@ page import="com.fssa.petmall.utills.*"%>
+<%@ page import="java.text.DecimalFormat"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.Statement"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,20 +75,37 @@
 		</form>
 		
 	</div>
+	<%String loggedInEmail = (String) session.getAttribute("loggedInEmail");
+	List<User> listaddress = new ArrayList<>();
+	UserService userService = new UserService();
+	listaddress = userService.getDefaultAddress(loggedInEmail);
+	List<User> defaultaddress = userService.getDefaultAddress(loggedInEmail);
+	%>
 	<div class="alladdress">
+	<%if(listaddress.size() < 1){ %>
+		<form action="../AddressAddServlet"method="post" class="addresscreate">
+ <div>
+  <h1 class="h1"><label for="w3review" class="label">Add address : </label></h1>
+  <textarea id="w3review"class="Address" name="address" rows="7" cols="25" placeholder="Enter your address"></textarea>
+  <br>
+  <input type="submit" class="submit"value="Submit">
+  </div>
+</form>
+	<%	
+	}else{
+	%>
+	
 		<div class="card">
-			<h1 class="addressh1">Address 1</h1>
-			<div class="address">Lorem ipsum dolor sit amet, consectetur
-				adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-				dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-				exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+			<h1 class="addressh1">Address</h1>
+			<div class="address">
+			     <%=defaultaddress.get(0).getAddress()%>
 			</div>
 			<div class="button-container">
-				<button class="button" onclick="change()">Change address</button>
-				<button class="button" onclick="edit()">Edit</button>
+				<!-- <button class="button" onclick="change()">Change address</button> --> 
 			</div>
 		</div>
 	</div>
+	<%} %>
 </body>
 <script>
 
@@ -136,7 +163,7 @@ margin:0px 0px 0px 120px ;
 	border-bottom: 5px solid #ccc;
 }
 
-form:before {
+.form:before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -341,10 +368,10 @@ button:hover {
 .alladdress{
    margin:0px 0px 0px 100px;
 }
-        .card {
+        .card{
         margin:0px 0px 0px 100px ;
-            width: 500px;
-            height: 350px;
+            width: 400px;
+            height: 220px;
             margin: 0px 0px 0px 0px;
             border: 1px solid #ccc;
             padding: 30px 50px 30px 50px;
@@ -353,6 +380,7 @@ button:hover {
 
         .address {
             font-size: 18px;
+            width:300px;
             margin-bottom: 20px;
         }
         .addressh1{
@@ -361,7 +389,7 @@ button:hover {
 
         .button-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
         }
 
 
@@ -386,6 +414,49 @@ button:hover {
 	input {
 		width: 100%;
 	}
+}
+
+.addresscreate {
+  min-width: 300px;
+  max-width:500px;
+  max-height:350px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+.label {
+  font-weight: bold;
+}
+.Address {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: horizontal; /* Allow vertical resizing of the textarea */
+}
+
+.submit{
+  width:90%;
+  margin:5%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.h1 {
+  margin: 10px 0;
+}
+
+/* Add media query for smaller screens */
+@media (max-width: 768px) {
+  .addresscreate {
+    max-width: 90%;
+  }
 }
 </style>
 </html>
