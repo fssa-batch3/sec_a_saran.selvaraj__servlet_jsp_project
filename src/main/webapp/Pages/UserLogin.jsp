@@ -11,6 +11,15 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+   <div style="display:flex; flex-direction:column;">
+     <%String error = request.getParameter("error");
+     if(error != null){
+     %>	 
+     <div class="errordiv">
+     	<p><%=error%></p>
+     </div>
+     <%}%>
+     
      <div class="container"> 
       <div class="wrapper">
         <div class="title"><span>Login Form</span></div>
@@ -30,6 +39,7 @@
           <div class="signup-link">Not a member? <a href="UserRegister.jsp">Signup now</a></div>
         </form>
       </div>            
+    </div>
     </div>
 </body>
 <style>
@@ -145,6 +155,16 @@ form .button input:hover{
 }
 form .signup-link a:hover{
   text-decoration: underline;
+}
+.errordiv {
+	background-color: #ffcccc;
+	padding:5px 10px ;
+	border-radius:10px;
+	width:320px;
+    color: #ff0000; /* Red text color for error message */
+    font-size: 14px;
+    margin-top: 10px; /* Add some space between the form and error message */
+	margin-left: 110px;
 }
 
 </style>

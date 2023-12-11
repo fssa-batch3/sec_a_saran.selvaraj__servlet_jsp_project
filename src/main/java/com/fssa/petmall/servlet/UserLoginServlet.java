@@ -35,9 +35,15 @@ public class UserLoginServlet extends HttpServlet {
 	    User userObject = null;
 		try {
 			userObject = userService.fetchUserIDByEmail(email);
-			if(userObject == null) {
+			if(email == null){
+	            // Invalid user credentials
+	            response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed.Email should not be null.");
+	        }else if(userObject == null) {
 				response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=User not found please check you Email");
-			}else if (UserService.loginUser(user) ) {
+			}else if(password == null){
+	            // Invalid user credentials
+	            response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed.Password should not be null.");
+	        }else if (UserService.loginUser(user) ) {
 	            // Setting attributes in session
 	            session.setAttribute("loggedInEmail",email);
 	            session.setAttribute("loggedInUserID",userObject.getUserID());
@@ -47,11 +53,10 @@ public class UserLoginServlet extends HttpServlet {
 	            session.setAttribute("loggedInmobileNumber",userObject.getPhone_number());
 	            session.setAttribute("loggedIndateOfBirth",userObject.getDate_of_birth());
 	            response.sendRedirect(request.getContextPath()+"/Pages/Home.jsp");
-	        } else {
-	            // Invalid user credentials
-	            response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed. Please check your password.");
+	        }else {
+	        	response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed.Please check your password.");
 	        }
-	    } catch (ServiceException e) {
+	    } catch (Exception e) {
 	        // Handle ServiceException by redirecting to the login page with an error message
 	        response.sendRedirect(request.getContextPath()+"/Pages/UserLogin.jsp?error=Authentication failed. Please check your email and password.");
 	    }
